@@ -6,7 +6,7 @@
         <div class="grd-box">
           <div class="info_user clrfix">
             <p class="txt">
-              {{}}등급 <strong class="name">{{}}</strong>님 반갑습니다.
+              {{this.$store.state.grade}}등급 <strong class="name">{{this.$store.state.name}}</strong>님 반갑습니다.
             </p>
             <ul class="mem_opt">
               <li id="membershipBenefit"><a href="javascript:;" onclick="location.href='#/main/getMembership.do';">멤버십라운지</a></li>                    

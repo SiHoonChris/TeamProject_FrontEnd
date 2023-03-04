@@ -53,7 +53,7 @@ export default {
           alert('아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요')
         }
         else {
-          this.emitter.emit('trans', this.buyerInfo.b_name)
+          this.$store.commit('loginPlease', this.buyerInfo)
           this.$router.replace('/')
         }
       }).catch((err) => {

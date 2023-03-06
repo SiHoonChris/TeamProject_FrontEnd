@@ -12,7 +12,7 @@
           <a href="#">아이디/비밀번호 찾기</a>
         </div>
         <button type="button" @click="loginAfterFormCheck()" id="login_btn" style="background-color: green;">로그인</button>
-        <a href="http://localhost:8086/buyer/signin"><button id="join_btn">가입하기</button></a>
+        <a href="http://localhost:8086/buyer/signup"><button id="join_btn">가입하기</button></a>
       </div>
 
       <div class="d-flex">

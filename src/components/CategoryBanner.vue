@@ -69,13 +69,13 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="../assets/newjeans-all-members.jpg" class="d-block w-100" alt="pic1">
+          <img src="../assets/AdBanner/AdBannerChoroc1.jpg" class="d-block" height="368px" alt="pic1">
         </div>
         <div class="carousel-item">
-          <img src="../assets/newjeans-all-members2.jpg" class="d-block w-100" alt="pic2">
+          <img src="../assets/AdBanner/AdBannerChoroc2.jpg" class="d-block" height="368px" alt="pic2">
         </div>
         <div class="carousel-item">
-          <img src="../assets/newjeans-all-members3.jpg" class="d-block w-100" alt="pic3">
+          <img src="../assets/AdBanner/AdBannerChoroc3.jpg" class="d-block" height="368px" alt="pic3">
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#commercialBanner" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -143,6 +143,7 @@ export default {
       "a c c c c"
       "a c c c c"
       "a c c c c";
+    margin-bottom: 40px;
   }
   .vertical_category {
     grid-area: a;

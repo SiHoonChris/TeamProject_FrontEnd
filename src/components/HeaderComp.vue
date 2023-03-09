@@ -3,7 +3,7 @@
     <nav class="fixed-top">
       <div class="container">
         <p class='right status' v-if="this.$store.state.loggedIn" id='welcome'>{{this.$store.state.name}}님 반갑습니다. [<a class="logout" @click="logout">로그아웃</a>]</p>
-        <p class='right status' v-else id='welcome'>로그인해야지?</p>
+        <p class='right status' v-else id='welcome'>&nbsp;</p>
         <router-link class='left' to="/"><img id="logo" src="../assets/green_icon.png" alt="logo"/></router-link>
         <div class='left' id="search_box">
           <span id="search">

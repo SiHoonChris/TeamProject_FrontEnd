@@ -4,8 +4,8 @@
       <div class="login member-login">
         <h1>로그인</h1>
         <form>
-          <input type="text" @click="removeRedBorder('#id')" id="id" maxlength="12" v-model="id" placeholder="아이디 / ID"/>
-          <input type="password" @click="removeRedBorder('#pw')" id="pw" maxlength="12" v-model="pwd" placeholder="비밀번호 / PW" autoComplete="on"/>
+          <input type="text" @click="removeRedBorder('#id')" id="id" maxlength="12" v-model="id" placeholder="아이디 / ID" v-focus/>
+          <input type="password" @click="removeRedBorder('#pw')" @keyup.enter="loginAfterFormCheck()" id="pw" maxlength="12" v-model="pwd" placeholder="비밀번호 / PW" autoComplete="on"/>
         </form>
         <div class="options">
           <input type="checkbox">로그인 유지<br>
@@ -78,6 +78,13 @@ export default {
     removeRedBorder(id) {
       if(document.querySelector(id).style.borderColor==='red'){
         document.querySelector(id).style.borderColor='revert'
+      }
+    }
+  },
+  directives: {
+    focus: {
+      mounted(el){
+        el.focus()
       }
     }
   }

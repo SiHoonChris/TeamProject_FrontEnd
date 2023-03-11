@@ -3,93 +3,12 @@
     <h3>{{title}}</h3>
     <div class='mostViewProd'>
       <div class="products">
-        <div class="card">
-          <img src="../assets/soccer/ronaldo.png" class="card-img-top" alt="product1">
+        <div class="card" :key=i v-for='(product, i) in productList'>
+          <img :src="product.img" class="card-img-top" alt="product">
           <div class="card-body" style="padding:0">
             <div class="card-text">
-              <p class="product-title" style="margin:0;">호날두</p>
-              <p class="product-price">270,000,000,000원</p>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="../assets/soccer/jo.jpeg" class="card-img-top" alt="product2">
-          <div class="card-body" style="padding:0">
-            <div class="card-text">
-              <p class="product-title" style="margin:0;">조규성</p>
-              <p class="product-price">6,700,000,000원</p>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="../assets/soccer/son.png" class="card-img-top" alt="product3">
-          <div class="card-body" style="padding:0">
-            <div class="card-text">
-              <p class="product-title" style="margin:0;">손흥민</p>
-              <p class="product-price">114,000,000,000원</p>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="../assets/soccer/kim.png" class="card-img-top" alt="product4">
-          <div class="card-body" style="padding:0">
-            <div class="card-text">
-              <p class="product-title" style="margin:0;">김민재</p>
-              <p class="product-price">26,100,000,000원</p>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="../assets/soccer/jung.jpeg" class="card-img-top" alt="product5">
-          <div class="card-body" style="padding:0">
-            <div class="card-text">
-              <p class="product-title" style="margin:0;">정우영</p>
-              <p class="product-price">2,500,000,000원</p>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="../assets/soccer/kim2.png" class="card-img-top" alt="product6">
-          <div class="card-body" style="padding:0">
-            <div class="card-text">
-              <p class="product-title" style="margin:0;">김진야</p>
-              <p class="product-price">1,100,000,000원</p>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="../assets/soccer/park.jpg" class="card-img-top" alt="product7">
-          <div class="card-body" style="padding:0">
-            <div class="card-text">
-              <p class="product-title" style="margin:0;">박지성</p>
-              <p class="product-price">78,100,000,000원</p>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="../assets/soccer/cha.jpeg" class="card-img-top" alt="product8">
-          <div class="card-body" style="padding:0">
-            <div class="card-text">
-              <p class="product-title" style="margin:0;">차범근</p>
-              <p class="product-price">300,000,000,000원</p>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="../assets/soccer/lee.jpeg" class="card-img-top" alt="product9">
-          <div class="card-body" style="padding:0">
-            <div class="card-text">
-              <p class="product-title" style="margin:0;">이청용</p>
-              <p class="product-price">16,100,000,000원</p>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img src="../assets/soccer/oh.jpeg" class="card-img-top" alt="product10">
-          <div class="card-body" style="padding:0">
-            <div class="card-text">
-              <p class="product-title" style="margin:0;">오현규</p>
-              <p class="product-price">4,100,000,000원</p>
+              <p class="product-title" style="margin:0;">{{product.name}}</p>
+              <p class="product-price">{{product.price}}원</p>
             </div>
           </div>
         </div>
@@ -102,7 +21,19 @@
 export default {
   data() {
     return {
-      distance:0
+      distance:0,
+      productList: [
+        {"img":require("../assets/soccer/ronaldo.png"), "name":"호날두", "price":"270,000,000,000"},
+        {"img":require("../assets/soccer/jo.jpeg"), "name":"조규성", "price":"6,700,000,000"},
+        {"img":require("../assets/soccer/son.png"), "name":"손흥민", "price":"114,000,000,000"},
+        {"img":require("../assets/soccer/kim.png"), "name":"김민재", "price":"26,100,000,000"},
+        {"img":require("../assets/soccer/jung.jpeg"), "name":"정우영", "price":"2,500,000,000"},
+        {"img":require("../assets/soccer/kim2.png"), "name":"김진야", "price":"1,100,000,000"},
+        {"img":require("../assets/soccer/park.jpg"), "name":"박지성", "price":"78,100,000,000"},
+        {"img":"https://attach.choroc.com/web/goods/1/img4/025883_20210618161159.jpg", "name":"유기농 우유", "price":"6,250"},
+        {"img":require("../assets/soccer/lee.jpeg"), "name":"이청용", "price":"16,100,000,000"},
+        {"img":require("../assets/soccer/oh.jpeg"), "name":"오현규", "price":"4,100,000,000"}
+      ]
     }
   },
   props: {
@@ -112,9 +43,19 @@ export default {
     this.flowDisplay()
   },
   methods: {
+    prodToDisplay() {
+      this.$axios.post(this.$serverUrl+'서버에 맵핑된 경로', {
+        "전송할 자료명":"전송할 자료"
+      }).then(() => { // "받아온 데이터"
+        //"받아온 데이터들을 this.productList로 저장"
+      }).catch((err)=>{
+        if (err.message.indexOf('Network Error') > -1) {
+          alert('불편을 드려 죄송합니다.\n잠시 후에 다시 시도해주십시오')
+        }
+      })
+    },
     flowDisplay() {
       setInterval(()=>{
-        setTimeout(()=>{
           const product = document.querySelectorAll('.card')
           const clone = document.querySelector('.card:first-child').cloneNode(true)
           setTimeout(()=>{
@@ -129,10 +70,9 @@ export default {
             document.querySelector(".products").appendChild(clone)
             product[0].remove()
             for(const i in product){
-              product[i].removeAttribute('style')
+              if(i>0) product[i].removeAttribute('style')
             }
           },800)
-        })
       }, 1900)
     }
   }

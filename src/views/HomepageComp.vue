@@ -1,7 +1,7 @@
 <template>
   <body>
     <category-banner/>
-    <most-view-product title="이번 주 인기 상품 Top10"/>
+    <most-view-product title="인기 상품 Top10"/>
   </body>
 </template>
 

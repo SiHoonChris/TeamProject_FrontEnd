@@ -5,25 +5,30 @@
         <img :src="this.$route.params.img">
       </div>
       <div class="infos_n_order">
-        <div class="category">
-          <a href="#">차·음료·생수·유제품</a>
+        <div class="product_info_part">
+          <div class="category">
+            <a href="#">{{this.$route.params.category}}</a>
+          </div>
+          <p class="product_name">{{name}}</p>
+          <div class="product_price">{{Number(this.price).toLocaleString()}}원</div>
         </div>
-        <p class="product_name">{{name}}</p>
-        <div class="product_price">{{price_fmt}}원</div>
-        <div class="order_count">
-          <span style="padding-left:20px;">구매수량</span>
-          <span style="padding-right:20px;">
-            <input type="number" v-model.number="count"/>
-          </span>
+        <div class="product_order_part">
+          <div class="order_count">
+            <span style="padding-left:20px;">구매수량</span>
+            <span style="padding-right:20px;">
+              <input type="number" min="1" max="99" v-model.number="count"/>
+            </span>
+          </div>
+          <div class="product_sum">
+            <span>상품금액 합계</span>
+            <span>{{total}}원</span>
+          </div>
+          <div class="btns">
+            <button class="cart">장바구니</button>
+            <button class="order">바로구매</button> <!--결제페이지로 연결-->
+          </div>
         </div>
-        <div class="product_sum">
-          <span>상품금액 합계</span>
-          <span>{{total}}원</span>
-        </div>
-        <div class="btns">
-          <button class="cart">장바구니</button>
-          <button class="order">바로구매</button> <!--결제페이지로 연결-->
-        </div>
+
       </div>
     </div>
     <div class="product_details">
@@ -39,20 +44,13 @@ export default {
     return {
       name: this.$route.params.name,
       price: this.$route.params.price,
-      price_fmt: '',
-      count: 0
+      count: 1
     }
-  },
-  mounted() {
-    this.price_fmt = this.price.toLocaleString()
   },
   computed: {
     total() {
       return (this.price * this.count).toLocaleString()
     }
-  },
-  methods: {
-
   }
 }
 </script>
@@ -73,6 +71,9 @@ export default {
     margin-bottom: 60px;
   }
   .product_img, .infos_n_order {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 500px;
     height: 100%;
   }
@@ -110,7 +111,6 @@ export default {
     background: lightgrey;
     font-weight: bold;
     padding: 16px 0;
-    margin-top: 292px;
   }
   .order_count span {
     font-size:20px;

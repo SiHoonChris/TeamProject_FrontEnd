@@ -4,12 +4,12 @@
     <div class='mostViewProd'>
       <div class="products">
         <div class="card" :key=i v-for='(product, i) in productList'>
-          <router-link :to="{name: 'product', params: {name: product.p_name, price: product.p_price, img: product.p_img}}">
+          <router-link :to="{name: 'product', params: {name: product.p_name, price: product.p_price, img: product.p_img, category: product.category}}">
             <img :src="product.p_img" class="card-img-top" alt="product">
             <div class="card-body" style="padding:0">
               <div class="card-text">
                 <p class="product-title" style="margin:0;"><b>{{product.p_name}}</b></p>
-                <p class="product-price">{{product.p_price}}원</p>
+                <p class="product-price">{{Number(product.p_price).toLocaleString()}}원</p>
               </div>
             </div>
           </router-link>
@@ -24,15 +24,21 @@ export default {
   data() {
     return {
       requestBody: {},
-      productList: {} 
+      productList: {},
+      fn_flowDisp: null
     }
   },
   props: {
     title: String
   },
   mounted(){
-    this.flowDisplay()
+    this.fn_flowDisp = setInterval(()=>{
+      this.flowDisplay()
+    }, 1900)
     this.prodToDisplay()
+  },
+  unmounted() {
+    clearInterval(this.fn_flowDisp)
   },
   methods: {
     prodToDisplay() {
@@ -47,25 +53,23 @@ export default {
       })
     },
     flowDisplay() {
-      setInterval(()=>{
-          const product = document.querySelectorAll('.card')
-          const clone = document.querySelector('.card:first-child').cloneNode(true)
-          setTimeout(()=>{
-            for(const i in product){
-              if(i>0){
-                product[i].style.transform="translateX(-270px)"
-                product[i].style.transition="0.8s linear"
-              }
-            }
-          })
-          setTimeout(()=>{
-            document.querySelector(".products").appendChild(clone)
-            product[0].remove()
-            for(const i in product){
-              if(i>0) product[i].removeAttribute('style')
-            }
-          },800)
-      }, 1900)
+      const product = document.querySelectorAll('.card')
+      const clone = document.querySelector('.card:first-child').cloneNode(true)
+      setTimeout(()=>{
+        for(const i in product){
+          if(i>0){
+            product[i].style.transform="translateX(-270px)"
+            product[i].style.transition="0.8s linear"
+          }
+        }
+      })
+      setTimeout(()=>{
+        document.querySelector(".products").appendChild(clone)
+        product[0].remove()
+        for(const i in product){
+          if(i>0) product[i].removeAttribute('style')
+        }
+      },800)
     }
   }
 }

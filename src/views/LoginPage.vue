@@ -24,7 +24,7 @@
         <p style="font-size:15px">제3기관을 이용해 로그인함으로써 저는 18세 이상이며 이용 약관에 동의하며, 개인정보 보호정책을 읽었음을 확인합니다.<br><br></p>
         <button id="login_btn" style="background-color: orange;">Google 계정으로 로그인</button>
         <button id="login_btn" style="background-color: green;">NAVER 계정으로 로그인</button>
-        <button id="login_btn" style="background-color: yellow; color:black;">KAKAO 계정으로 로그인</button>
+        <button id="login_btn" style="background-color: yellow; color:black;" @click="KakaoLogin()">KAKAO 계정으로 로그인</button>
       </div>
     </div>
   </div>
@@ -36,7 +36,6 @@ export default {
     return {
       id: '',
       pwd: '',
-      requestBody: {},
       buyerInfo: {}
     }
   },
@@ -78,6 +77,14 @@ export default {
       if(document.querySelector(id).style.borderColor==='red'){
         document.querySelector(id).style.borderColor='revert'
       }
+    },
+    KakaoLogin() {
+      window.Kakao.Auth.authorize({
+        redirectUri: 'http://localhost:8086/buyer/KAKAOlogin',
+        scope: 'profile_nickname, account_email, birthday'
+      })
+      // Spring에서 받은 토큰 가져오기
+      // 받아온 토큰으로 사용자 정보 출력
     }
   },
   directives: {

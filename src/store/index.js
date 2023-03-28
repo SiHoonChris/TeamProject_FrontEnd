@@ -19,7 +19,16 @@ export default createStore({
       state.toMyPage = true
       state.toLoginPage = false
     },
+    KakaoLogin (state, payload) {
+      state.name = payload.id
+      state.grade = '씨앗'
+      state.loggedIn = true
+      state.toMyPage = true
+      state.toLoginPage = false
+    },
     logoutPlease (state) {
+      state.name = "name"
+      state.grade = "grade"
       state.loggedIn = false
       state.toMyPage = false
       state.toLoginPage = true

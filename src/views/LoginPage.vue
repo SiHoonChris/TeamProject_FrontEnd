@@ -81,10 +81,18 @@ export default {
     KakaoLogin() {
       window.Kakao.Auth.authorize({
         redirectUri: 'http://localhost:8086/buyer/KAKAOlogin',
-        scope: 'profile_nickname, account_email, birthday'
       })
-      // Spring에서 받은 토큰 가져오기
-      // 받아온 토큰으로 사용자 정보 출력
+      this.$axios.post(this.$serverUrl+'/buyer/KAKAOlogin', {
+        params:{}
+      }).then((res) => {
+        this.buyerInfo=res.data
+        this.$store.commit('KakaoLogin', this.buyerInfo)
+        this.$router.replace('/')
+      }).catch((err) => {
+        if (err.message.indexOf('Network Error') > -1) {
+          alert('서버 통신 문제 : 잠시 후에 다시 시도해주십시오')
+        }
+      })
     }
   },
   directives: {
